@@ -1,0 +1,95 @@
+unsigned int TFT_DataPort at GPIOE_ODR;
+sbit TFT_WR  at GPIOE_ODR.B11;
+sbit TFT_RD  at GPIOE_ODR.B10;
+sbit TFT_CS  at GPIOE_ODR.B15;
+sbit TFT_RS  at GPIOE_ODR.B12;
+sbit TFT_RST at GPIOE_ODR.B8;
+void main() {
+
+     int i=120,j=160;
+         int x[3]={120,120+12,120+24 },y[3]={160,160,160};
+     GPIO_Digital_Input(&GPIOC_BASE,_GPIO_PINMASK_13);
+     GPIO_Digital_Input(&GPIOD_BASE,_GPIO_PINMASK_2);
+     GPIO_Digital_Input(&GPIOB_BASE,_GPIO_PINMASK_5);
+     GPIO_Digital_Input(&GPIOA_BASE,_GPIO_PINMASK_6);
+     GPIO_Digital_Input(&GPIOD_BASE,_GPIO_PINMASK_4);
+     GPIO_Digital_Output(&GPIOC_BASE,_GPIO_PINMASK_2);
+     GPIO_Digital_Output(&GPIOC_BASE,_GPIO_PINMASK_3);
+     TFT_Rotate_180(1);
+     TFT_Init_ILI9341_8bit(240, 320);
+     TFT_Fill_Screen(CL_BLACK);
+     TFT_Set_Pen(CL_AQUA, 10);
+     TFT_Rectangle_Round_Edges(4, 8, 219, 300, 12);
+       TFT_Set_Pen(CL_AQUA, 5);
+          TFT_Circle(x[0], y[0], 3);
+               TFT_Circle(x[1], y[1], 3);
+               TFT_Circle(x[2], y[2], 3);
+
+
+
+
+
+
+     while(1)
+     {
+
+
+          if (Button(&GPIOA_IDR, 6, 1, 0))  //right
+           {
+            if(y[0]-12> 17)
+            {
+             TFT_Set_Pen(CL_BLACK, 5);
+               TFT_Circle(x[2], y[2], 3);
+               x[2]=x[1];y[2]=y[1]; x[1]=x[0];y[1]=y[0];
+              y[0]-=12  ;
+              TFT_Set_Pen(CL_AQUA, 5);
+          TFT_Circle(x[0], y[0], 3);
+            //Delay_ms(1000);
+           }   }
+         if (Button(&GPIOD_IDR, 2, 1, 0))   //left
+         {      if(y[0]+12<290)
+            {
+              TFT_Set_Pen(CL_BLACK, 5);
+               TFT_Circle(x[2], y[2], 3);
+               x[2]=x[1];y[2]=y[1]; x[1]=x[0];y[1]=y[0];
+              y[0]+=12  ;
+               TFT_Set_Pen(CL_AQUA, 5);
+               TFT_Circle(x[0], y[0], 3);
+            //Delay_ms(1000);
+              }
+            
+
+         }
+          if (Button(&GPIOD_IDR, 4, 1, 0))   //up
+         {       if(x[0]-12> 12)
+            {
+             TFT_Set_Pen(CL_BLACK, 5);
+                TFT_Circle(x[2], y[2], 3);
+               x[2]=x[1];y[2]=y[1]; x[1]=x[0];y[1]=y[0];
+              x[0]-=12  ;
+               TFT_Set_Pen(CL_AQUA, 5);
+               TFT_Circle(x[0], y[0], 3);
+            //Delay_ms(1000);
+              }
+            
+
+         }
+          if (Button(&GPIOB_IDR, 5, 1, 0))   //down
+         {         if(x[0]+12< 216)
+            {
+               TFT_Set_Pen(CL_BLACK, 5);
+               TFT_Circle(x[2], y[2], 3);
+               x[2]=x[1];y[2]=y[1]; x[1]=x[0];y[1]=y[0];
+              x[0]+=12  ;
+               TFT_Set_Pen(CL_AQUA, 5);
+               TFT_Circle(x[0], y[0], 3);
+              //Delay_ms(1000);
+               }
+              
+
+         }
+         Delay_ms(100);
+
+     }
+
+}

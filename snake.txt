@@ -1,0 +1,46 @@
+unsigned int TFT_DataPort at GPIOE_ODR;
+sbit TFT_WR  at GPIOE_ODR.B11;
+sbit TFT_RD  at GPIOE_ODR.B10;
+sbit TFT_CS  at GPIOE_ODR.B15;
+sbit TFT_RS  at GPIOE_ODR.B12;
+sbit TFT_RST at GPIOE_ODR.B8;
+void main() {
+     int i=0,j=4;
+     TFT_Rotate_180(1);
+     TFT_Init_ILI9341_8bit(240, 320);
+     TFT_Fill_Screen(CL_WHITE);
+     TFT_Set_Font(TFT_defaultFont, CL_BLACK, FO_VERTICAL);
+     //TFT_Dot(238, 300, CL_BLACK);
+
+
+     while(1)
+     {      if(j%2)
+           { for( i=9;i<310;i+=12)
+           {
+             TFT_Set_Font(TFT_defaultFont, CL_BLACK, FO_VERTICAL);
+             TFT_Write_Char('A',j,i);
+             TFT_Set_Font(TFT_defaultFont, CL_WHITE, FO_VERTICAL);
+               TFT_Write_Char('A',j,i-12);
+             Delay_ms(100);
+           }
+            TFT_Set_Font(TFT_defaultFont, CL_WHITE, FO_VERTICAL);
+            TFT_Write_Char('A',j,i-12);
+           }
+           else
+           {
+           for( i=310;i>9;i-=12)
+           {
+             TFT_Set_Font(TFT_defaultFont, CL_BLACK, FO_VERTICAL);
+             TFT_Write_Char('A',j,i);
+             TFT_Set_Font(TFT_defaultFont, CL_WHITE, FO_VERTICAL);
+               TFT_Write_Char('A',j,i+12);
+             Delay_ms(100);
+           }    
+            TFT_Set_Font(TFT_defaultFont, CL_WHITE, FO_VERTICAL);
+               TFT_Write_Char('A',j,i+12);
+            }
+           j+=11;
+           if(j>=236)
+           j=4;
+     }
+}

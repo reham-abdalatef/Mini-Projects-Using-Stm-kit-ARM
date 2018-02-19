@@ -1,0 +1,26 @@
+unsigned int TFT_DataPort at GPIOE_ODR;
+sbit TFT_WR  at GPIOE_ODR.B11;
+sbit TFT_RD  at GPIOE_ODR.B10;
+sbit TFT_CS  at GPIOE_ODR.B15;
+sbit TFT_RS  at GPIOE_ODR.B12;
+sbit TFT_RST at GPIOE_ODR.B8;
+void main() {
+     int i=0;
+     TFT_Rotate_180(1);
+     TFT_Init_ILI9341_8bit(240, 320);
+     TFT_Fill_Screen(CL_WHITE);
+     TFT_Set_Font(TFT_defaultFont, CL_BLACK, FO_VERTICAL);
+     //TFT_Dot(238, 300, CL_BLACK);
+
+
+
+     while(1)
+     {
+                     TFT_Set_Font(TFT_defaultFont, CL_BLACK, FO_VERTICAL);
+                     TFT_Write_Char('A',4,8);
+                     Delay_ms(1000);
+                     TFT_Set_Font(TFT_defaultFont, CL_WHITE, FO_VERTICAL);
+                       TFT_Write_Char('A',4,8);
+                     Delay_ms(1000);
+     }
+}

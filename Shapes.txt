@@ -1,0 +1,31 @@
+unsigned int TFT_DataPort at GPIOE_ODR;
+sbit TFT_WR  at GPIOE_ODR.B11;
+sbit TFT_RD  at GPIOE_ODR.B10;
+sbit TFT_CS  at GPIOE_ODR.B15;
+sbit TFT_RS  at GPIOE_ODR.B12;
+sbit TFT_RST at GPIOE_ODR.B8;
+void main() {
+     int i=0,j=4;
+     TFT_Rotate_180(1);
+     TFT_Init_ILI9341_8bit(240, 320);
+     TFT_Fill_Screen(CL_WHITE);
+     TFT_Set_Font(TFT_defaultFont, CL_BLACK, FO_VERTICAL);
+     TFT_Rectangle_Round_Edges(4, 8, 219, 300, 12);
+     TFT_Rectangle_Round_Edges(40, 30, 100, 100, 12);
+
+     TFT_Rectangle_Round_Edges(40, 200, 100, 270, 12);
+          TFT_Circle(150, 150, 40);
+     TFT_Set_Font(TFT_defaultFont, CL_BLUE, FO_VERTICAL);
+     TFT_Write_Text("HELP", 150, 170);
+     TFT_Write_Text("START", 70, 260);
+     TFT_Write_Text("EXIT", 70, 80);
+
+
+
+
+
+
+     while(1)
+     {      }
+
+}
